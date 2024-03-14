@@ -1,6 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { getCurrentAccount } from '@/lib/AppWrite/api';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+
+interface User {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  imageUrl: string;
+  bio: string;
+}
+
+export interface UserDetailsState {
+  user: User;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+}
+
+const initialState: UserDetailsState = {
   user: {
     id: '',
     name: '',
@@ -11,24 +28,24 @@ const initialState = {
   },
   isLoading: false,
   isAuthenticated: false,
-};
+}
 
-const userDetails = createSlice({
+const userDetailsSlice = createSlice({
   name: 'userDetails',
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
-    setIsAuthenticated: (state, action) => {
+    setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
-    checkAuthUser: (state, action) => {
-      state.isAuthenticated = action.payload;
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
   },
-}) as Slice<typeof initialState, 'userDetails'>;
+});
 
-export const { setUser, setIsAuthenticated, checkAuthUser } = userDetails.actions;
+export const { setUser, setIsAuthenticated, setLoading } = userDetailsSlice.actions;
 
-export default userDetails.reducer;
+export default userDetailsSlice.reducer;

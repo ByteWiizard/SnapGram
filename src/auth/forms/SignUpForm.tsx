@@ -7,10 +7,8 @@ import { z } from "zod"
 import { SignUpValidation } from '@/lib/Validation'
 import Loader from '@/components/shared/Loader'
 import { Link } from 'react-router-dom'
-
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccountMutation, useSignInAccountMutation } from '@/lib/react-query/queriesAndMutation'
-
 
 const SignUpForm = () => {
   
